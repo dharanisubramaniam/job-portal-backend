@@ -4,36 +4,33 @@ const JobSchema = new mongoose.Schema({
   category_id: {
     type: Number,
   },
-  category: {
-    type: String,
-  },
   id: {
-    type: Number,
+    type: Number
   },
   designation: {
     type: String,
   },
-  company: {
-    type: String,
+  company_id: {
+    type: Number,
   },
-  location: {
-    type: String,
+  location_id: {
+    type: Number,
   },
-  jobType: {
-    type: String,
+  job_type_id: {
+    type: Number,
   },
   salary: {
     type: Number,
   },
-  experience: {
-    type: String,
+  min_experience: {
+    type: Number,
   },
-  jobLink: {
-    type: String,
+  max_experience: {
+    type: Number,
   },
-  logo: {
+  job_link: {
     type: String,
-  },
+  }
 });
 
 module.exports = Job = mongoose.model("job", JobSchema);

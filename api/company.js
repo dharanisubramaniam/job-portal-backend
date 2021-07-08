@@ -2,12 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-const Category = require("../schema/Category");
+const Company = require("../schema/Company");
 
 router.get("/", async (req, res) => {
   try {
-    const category = await Category.find({});
-    res.json(category);
+    const company = await Company.find({});
+    res.json(company);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("server error");
@@ -16,17 +16,18 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const allCategories = await Category.find().sort('id');
-    allCategories.reverse();
-    console.log(allCategories);
-    let maxId = allCategories.length > 0 ? allCategories[0].id : 0;    
+    const allCompanies = await Company.find().sort('id');
+    allCompanies.reverse();
+    console.log(allCompanies);
+    let maxId = allCompanies.length > 0 ? allCompanies[0].id : 0;    
     console.log(maxId);
-    const newCategory = new Category({
+    const newCompany = new Company({
       name: req.body.name,
+      logo: req.body.logo,
       id: maxId+1,
     });
-    const category = await newCategory.save();
-    res.json(category);
+    const company = await newCompany.save();
+    res.json(company);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("server error");

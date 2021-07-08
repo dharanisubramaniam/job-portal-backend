@@ -15,6 +15,9 @@ app.use(express.json({ extended: false }));
 
 app.use("/api/jobs", require("./api/job"));
 app.use("/api/category", require("./api/category"));
+app.use("/api/company", require("./api/company"));
+app.use("/api/location", require("./api/location"));
+app.use("/api/jobType", require("./api/jobType"));
 
 const PORT = process.env.PORT || 5001;
 app.get("/", (req, res) => {

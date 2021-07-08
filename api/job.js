@@ -6,18 +6,23 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
+    console.log('Entering Jobs POST');
+    const allJobs = await Job.find().sort('id');
+    allJobs.reverse();
+    console.log(allJobs);
+    let maxId = allJobs.length > 0 ? allJobs[0].id : 0;    
+    console.log(maxId);
     const newJob = new Job({
       category_id: req.body.category_id,
-      category: req.body.category,
-      id: req.body.id,
+      id: maxId+1,
       designation: req.body.designation,
-      company: req.body.company,
-      location: req.body.location,
-      jobType: req.body.jobType,
+      company_id: req.body.company_id,
+      location_id: req.body.location_id,
+      job_type_id: req.body.job_type_id,
       salary: req.body.salary,
-      experience: req.body.experience,
-      jobLink: req.body.jobLink,
-      logo: req.body.logo,
+      min_experience: req.body.min_experience,
+      max_experience: req.body.max_experience,
+      job_link: req.body.job_link
     });
     const job = await newJob.save();
     res.json(job);

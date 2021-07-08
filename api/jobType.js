@@ -2,12 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-const Category = require("../schema/Category");
+const JobType = require("../schema/JobType");
 
 router.get("/", async (req, res) => {
   try {
-    const category = await Category.find({});
-    res.json(category);
+    const jobType = await JobType.find({});
+    res.json(jobType);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("server error");
@@ -16,17 +16,17 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const allCategories = await Category.find().sort('id');
-    allCategories.reverse();
-    console.log(allCategories);
-    let maxId = allCategories.length > 0 ? allCategories[0].id : 0;    
+    const allJobType = await JobType.find().sort('id');
+    allJobType.reverse();
+    console.log(allJobType);
+    let maxId = allJobType.length > 0 ? allJobType[0].id : 0;    
     console.log(maxId);
-    const newCategory = new Category({
+    const newJobType = new JobType({
       name: req.body.name,
       id: maxId+1,
     });
-    const category = await newCategory.save();
-    res.json(category);
+    const jobType = await newJobType.save();
+    res.json(jobType);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("server error");
