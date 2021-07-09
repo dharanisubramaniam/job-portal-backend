@@ -9,7 +9,6 @@ router.post("/", async (req, res) => {
     const newJob = new Job({
       category_id: req.body.category_id,
       category: req.body.category,
-      id: req.body.id,
       designation: req.body.designation,
       company: req.body.company,
       location: req.body.location,
@@ -19,7 +18,15 @@ router.post("/", async (req, res) => {
       jobLink: req.body.jobLink,
       logo: req.body.logo,
     });
+    console.log(newJob._id);
+    // const conditions = { _id: newJob._id },
+    //   update = { $inc: { count: 1 } };
+    const _job = await Job.findByIdAndUpdate(res._id, {
+      $inc: { count: 1 },
+    });
+    console.log(_job);
     const job = await newJob.save();
+    // console.log(job, "2");
     res.json(job);
   } catch (error) {
     console.log(error.message);

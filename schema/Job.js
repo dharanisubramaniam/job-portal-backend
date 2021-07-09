@@ -7,8 +7,9 @@ const JobSchema = new mongoose.Schema({
   category: {
     type: String,
   },
-  id: {
+  count: {
     type: Number,
+    default: 0,
   },
   designation: {
     type: String,
