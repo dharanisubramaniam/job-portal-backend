@@ -35,7 +35,18 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const job = await Job.find({});
-    res.json(job);
+    const perPage = req.header('perPage');
+    const pageNumber = req.header('pageNumber');
+    let paginatedJobs = job.slice(((pageNumber-1)*perPage), perPage * pageNumber);
+    let jobResponse = {
+      data: paginatedJobs,
+      metaData: {
+        perPage: perPage,
+        pageNumber: pageNumber,
+        total: job.length
+      }
+    }
+    res.json(jobResponse);
   } catch (error) {
     console.log(error.message);
     res.status(500).send("server error");
