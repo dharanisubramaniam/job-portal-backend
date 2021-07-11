@@ -16,14 +16,14 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const allCategories = await Category.find().sort('id');
+    const allCategories = await Category.find().sort("id");
     allCategories.reverse();
-    console.log(allCategories);
-    let maxId = allCategories.length > 0 ? allCategories[0].id : 0;    
-    console.log(maxId);
+    // console.log(allCategories);
+    let maxId = allCategories.length > 0 ? allCategories[0].id : 0;
+    // console.log(maxId);
     const newCategory = new Category({
       name: req.body.name,
-      id: maxId+1,
+      id: maxId + 1,
     });
     const category = await newCategory.save();
     res.json(category);

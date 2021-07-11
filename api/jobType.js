@@ -16,14 +16,14 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const allJobType = await JobType.find().sort('id');
+    const allJobType = await JobType.find().sort("id");
     allJobType.reverse();
-    console.log(allJobType);
-    let maxId = allJobType.length > 0 ? allJobType[0].id : 0;    
-    console.log(maxId);
+    // console.log(allJobType);
+    let maxId = allJobType.length > 0 ? allJobType[0].id : 0;
+    // console.log(maxId);
     const newJobType = new JobType({
       name: req.body.name,
-      id: maxId+1,
+      id: maxId + 1,
     });
     const jobType = await newJobType.save();
     res.json(jobType);

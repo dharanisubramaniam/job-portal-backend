@@ -7,9 +7,9 @@ const CompanySchema = new mongoose.Schema({
   id: {
     type: Number,
   },
-  logo: {
+  logo_url: {
     type: String,
-  }
+  },
 });
 
 module.exports = Company = mongoose.model("company", CompanySchema);

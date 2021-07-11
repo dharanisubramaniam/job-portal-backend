@@ -16,14 +16,14 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const allLocation = await Location.find().sort('id');
+    const allLocation = await Location.find().sort("id");
     allLocation.reverse();
-    console.log(allLocation);
-    let maxId = allLocation.length > 0 ? allLocation[0].id : 0;    
-    console.log(maxId);
+    // console.log(allLocation);
+    let maxId = allLocation.length > 0 ? allLocation[0].id : 0;
+    // console.log(maxId);
     const newLocation = new Location({
       name: req.body.name,
-      id: maxId+1,
+      id: maxId + 1,
     });
     const location = await newLocation.save();
     res.json(location);

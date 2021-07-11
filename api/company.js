@@ -16,15 +16,15 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const allCompanies = await Company.find().sort('id');
+    const allCompanies = await Company.find().sort("id");
     allCompanies.reverse();
-    console.log(allCompanies);
-    let maxId = allCompanies.length > 0 ? allCompanies[0].id : 0;    
-    console.log(maxId);
+    // console.log(allCompanies);
+    let maxId = allCompanies.length > 0 ? allCompanies[0].id : 0;
+    // console.log(maxId);
     const newCompany = new Company({
       name: req.body.name,
-      logo: req.body.logo,
-      id: maxId+1,
+      logo_url: "/assets/" + req.body.logo_name_with_ext,
+      id: maxId + 1,
     });
     const company = await newCompany.save();
     res.json(company);

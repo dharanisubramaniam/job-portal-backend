@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 
 const JobSchema = new mongoose.Schema({
-  category_id: {
-    type: Number,
-  },
+  category_ids: [
+    {
+      type: Number,
+    },
+  ],
   id: {
-    type: Number
+    type: Number,
   },
   designation: {
     type: String,
@@ -13,14 +15,19 @@ const JobSchema = new mongoose.Schema({
   company_id: {
     type: Number,
   },
-  location_id: {
-    type: Number,
-  },
-  job_type_id: {
-    type: Number,
-  },
+
+  location_ids: [
+    {
+      type: Number,
+    },
+  ],
+  job_type_ids: [
+    {
+      type: Number,
+    },
+  ],
   salary: {
-    type: Number,
+    type: String,
   },
   min_experience: {
     type: Number,
@@ -30,7 +37,7 @@ const JobSchema = new mongoose.Schema({
   },
   job_link: {
     type: String,
-  }
+  },
 });
 
 module.exports = Job = mongoose.model("job", JobSchema);
