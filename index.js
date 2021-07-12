@@ -18,6 +18,8 @@ app.use("/api/category", require("./api/category"));
 app.use("/api/company", require("./api/company"));
 app.use("/api/location", require("./api/location"));
 app.use("/api/jobType", require("./api/jobType"));
+app.use("/api/auth", require("./api/auth"));
+app.use("/api/register", require("./api/register"));
 
 const PORT = process.env.PORT || 5001;
 app.get("/", (req, res) => {

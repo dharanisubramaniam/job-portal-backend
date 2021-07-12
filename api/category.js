@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const Category = require("../schema/Category");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const category = await Category.find({});
     res.json(category);
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const allCategories = await Category.find().sort("id");
     allCategories.reverse();

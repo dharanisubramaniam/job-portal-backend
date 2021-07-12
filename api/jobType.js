@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const JobType = require("../schema/JobType");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const jobType = await JobType.find({});
     res.json(jobType);
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const allJobType = await JobType.find().sort("id");
     allJobType.reverse();

@@ -3,10 +3,11 @@ const express = require("express");
 const Job = require("../schema/Job");
 
 const router = express.Router();
+const auth = require("../middleware/auth");
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
-    // console.log('Entering Jobs POST');
+    console.log("Entering Jobs POST");
     const allJobs = await Job.find().sort("id");
     allJobs.reverse();
     // console.log(allJobs);
@@ -32,20 +33,24 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const job = await Job.find({});
-    const perPage = req.header('perPage');
-    const pageNumber = req.header('pageNumber');
-    let paginatedJobs = job.slice(((pageNumber-1)*perPage), perPage * pageNumber);
+    let perPage = req.header("perPage") ? req.header("perPage") : 10;
+    const pageNumber = req.header("pageNumber") ? req.header("pageNumber") : 1;
+
+    let paginatedJobs = job.slice(
+      (pageNumber - 1) * perPage,
+      perPage * pageNumber
+    );
     let jobResponse = {
       data: paginatedJobs,
       metaData: {
-        perPage: perPage,
-        pageNumber: pageNumber,
-        total: job.length
-      }
-    }
+        perPage: Number(perPage),
+        pageNumber: Number(pageNumber),
+        total: job.length,
+      },
+    };
     res.json(jobResponse);
   } catch (error) {
     console.log(error.message);

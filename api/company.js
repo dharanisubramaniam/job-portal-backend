@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const Company = require("../schema/Company");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const company = await Company.find({});
     res.json(company);
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const allCompanies = await Company.find().sort("id");
     allCompanies.reverse();

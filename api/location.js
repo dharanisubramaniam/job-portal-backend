@@ -3,8 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 const Location = require("../schema/Location");
+const auth = require("../middleware/auth");
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const location = await Location.find({});
     res.json(location);
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
     const allLocation = await Location.find().sort("id");
     allLocation.reverse();
