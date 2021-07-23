@@ -17,6 +17,7 @@ router.get("/", auth, async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   try {
+    console.log(req);
     const allCompanies = await Company.find().sort("id");
     allCompanies.reverse();
     // console.log(allCompanies);

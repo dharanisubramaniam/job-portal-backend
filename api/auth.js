@@ -12,7 +12,7 @@ router.post(
   check("password").notEmpty().withMessage("Password is required"),
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors.array());
+    // console.log(errors.array());
     if (!errors.isEmpty()) {
       return res.status("400").json({ errors: errors.array() });
     }
@@ -34,7 +34,7 @@ router.post(
           .status(400)
           .json({ errors: [{ msg: "Invalid Credentials" }] });
       }
-      console.log(user);
+      // console.log(user);
       const payload = {
         user: {
           id: user.id,
@@ -44,7 +44,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: "150" },
+        { expiresIn: "1 hour" },
         (err, token) => {
           if (err) throw err;
           res.json({ token });

@@ -38,6 +38,9 @@ const JobSchema = new mongoose.Schema({
   job_link: {
     type: String,
   },
+  last_updated: {
+    type: Date,
+  },
 });
 
 module.exports = Job = mongoose.model("job", JobSchema);
