@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const config = require("config");
+const config = require("./config");
 
-const db = config.get("dbURI");
+const db = config.dbURI;
 
 const mongooseDB = async () => {
   try {

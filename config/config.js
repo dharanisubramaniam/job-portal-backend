@@ -1,0 +1,5 @@
+module.exports = {
+  dbURI:
+    "mongodb+srv://filmy:filmy12345@filmy.2577p.mongodb.net/JobPortal?retryWrites=true&w=majority",
+  jwtSecret: "mySecretId",
+};
